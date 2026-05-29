@@ -17,6 +17,6 @@ void	free_vs(t_vs **vs)
 	delwin((*vs)->win_info);
 	delwin((*vs)->win_arena);
 	delwin((*vs)->win_help);
-	ft_memdel((void *)vs);
+	ft_memdel((void **)vs);
 	endwin();
 }

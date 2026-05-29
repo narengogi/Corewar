@@ -12,6 +12,7 @@
 
 #include "corewar.h"
 #include "corewar_vs.h"
+#include <stdio.h>
 
 static void	handle_buttons(t_vm *vm)
 {
@@ -63,6 +64,21 @@ static void	exec_cycle_vs(t_vm *vm)
 	}
 }
 
+static void	print_result_on_exit(t_vm *vm)
+{
+	if (!vm->last_alive)
+		return ;
+	if (!vm->cursors_num)
+		printf("Contestant %d, \"%s\", has won !\n",
+			FT_ABS(vm->last_alive->id),
+			vm->last_alive->name);
+	else
+		printf("Contestant %d, \"%s\", is leading.\n",
+			FT_ABS(vm->last_alive->id),
+			vm->last_alive->name);
+	fflush(stdout);
+}
+
 void		exec_vs(t_vm *vm)
 {
 	int32_t i;
@@ -84,4 +100,5 @@ void		exec_vs(t_vm *vm)
 		draw(vm);
 	}
 	free_vs(&(vm->vs));
+	print_result_on_exit(vm);
 }

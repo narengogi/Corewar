@@ -35,7 +35,7 @@ void	write_asm_file(int fd, t_parser *parser)
 				ft_dprintf(fd, " %ld", (long)current->args[i]);
 			else if (current->args_types[i] == T_REG)
 				ft_dprintf(fd, " r%ld", (long)current->args[i]);
-			if (i < current->op->args_num - 1)
+			if (i < (unsigned)(current->op->args_num - 1))
 				ft_dprintf(fd, ",");
 			i++;
 		}

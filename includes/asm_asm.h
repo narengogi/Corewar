@@ -46,7 +46,7 @@ typedef enum
 	END
 }	t_type;
 
-static char				*g_type[] = {
+static char				__attribute__((unused)) *g_type[] = {
 	"COMMAND",
 	"STRING",
 	"LABEL",

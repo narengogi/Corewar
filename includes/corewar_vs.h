@@ -81,7 +81,7 @@
 # define INDEX_CURSOR(X)		((X) + 5)
 # define INDEX_PLAYER(X)		((X) - 5)
 
-static int g_colors_players[15] = {
+static int __attribute__((unused)) g_colors_players[15] = {
 	COLOR_PAIR(GRAY),
 	COLOR_PAIR(GREEN),
 	COLOR_PAIR(YELLOW),

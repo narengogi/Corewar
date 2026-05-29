@@ -92,7 +92,7 @@ void			op_aff(t_vm *vm, t_cursor *cursor);
 ** Array
 */
 
-static t_op		g_op[16] = {
+static t_op		__attribute__((unused)) g_op[16] = {
 	{
 		.name = "live",
 		.code = 0x01,

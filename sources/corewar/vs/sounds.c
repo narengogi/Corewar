@@ -14,18 +14,22 @@
 
 void	play_victory_sound(t_vm *vm)
 {
+	int ret __attribute__((unused));
+
 	if (vm->vs->sounds)
 	{
-		system("pkill afplay");
-		system("afplay sounds/victory.mp3 &> /dev/null &");
+		ret = system("pkill afplay");
+		ret = system("afplay sounds/victory.mp3 &> /dev/null &");
 	}
 }
 
 void	play_death_sound(t_vm *vm)
 {
+	int ret __attribute__((unused));
+
 	if (vm->vs->sounds)
 	{
-		system("pkill afplay");
-		system("afplay sounds/blaster.mp3 &> /dev/null &");
+		ret = system("pkill afplay");
+		ret = system("afplay sounds/blaster.mp3 &> /dev/null &");
 	}
 }

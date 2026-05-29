@@ -21,6 +21,7 @@ void		write_bytecode_file(int fd, t_parser *parser)
 	int32_t	len;
 	int32_t	pos;
 	char	*bytecode;
+	ssize_t	ret __attribute__((unused));
 
 	pos = 0;
 	len = 4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4 + parser->pos;
@@ -37,6 +38,6 @@ void		write_bytecode_file(int fd, t_parser *parser)
 	pos += COMMENT_LENGTH;
 	pos += 4;
 	ft_memcpy(&bytecode[pos], parser->code, (size_t)parser->pos);
-	write(fd, bytecode, (size_t)len);
+	ret = write(fd, bytecode, (size_t)len);
 	free(bytecode);
 }

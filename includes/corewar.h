@@ -42,7 +42,7 @@
 ** Arg's type — Arg's code
 */
 
-static uint8_t			g_arg_code[3] = {
+static uint8_t			__attribute__((unused)) g_arg_code[3] = {
 	T_REG,
 	T_DIR,
 	T_IND

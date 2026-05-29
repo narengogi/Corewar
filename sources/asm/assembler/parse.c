@@ -129,7 +129,7 @@ void	parse_token(t_parser *parser, char **row)
 
 void	parse_asm(t_parser *parser)
 {
-	ssize_t	size;
+	ssize_t	size = 0;
 	char	*row;
 
 	while (++parser->row

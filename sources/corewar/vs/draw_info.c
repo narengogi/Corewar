@@ -49,11 +49,11 @@ static void	draw_game_params(t_vm *vm)
 	mvwprintw(vm->vs->win_info,
 			vm->vs->cursor_pos += 2,
 			DEFAULT_INDENT,
-			"%-32s %zu", "Cycle delta :", CYCLE_DELTA);
+			"%-32s %d", "Cycle delta :", CYCLE_DELTA);
 	mvwprintw(vm->vs->win_info,
 			vm->vs->cursor_pos += 2,
 			DEFAULT_INDENT,
-			"%-32s %.6zu/%zu", "Lives :",
+			"%-32s %.6zu/%d", "Lives :",
 			vm->lives_num, NBR_LIVE);
 	mvwprintw(vm->vs->win_info,
 			vm->vs->cursor_pos += 2,
@@ -63,7 +63,7 @@ static void	draw_game_params(t_vm *vm)
 	mvwprintw(vm->vs->win_info,
 			vm->vs->cursor_pos += 2,
 			DEFAULT_INDENT,
-			"%-32s %.6zu/%zu", "Checks :",
+			"%-32s %.6zu/%d", "Checks :",
 			vm->checks_num, MAX_CHECKS);
 }
 

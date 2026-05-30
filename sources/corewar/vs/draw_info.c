@@ -85,14 +85,55 @@ static void	draw_aff(t_vm *vm)
 
 static void	draw_winner(t_vm *vm)
 {
-	vm->vs->cursor_pos = (vm->vs->cursor_pos + HEIGHT - 3) / 2;
+	vm->vs->cursor_pos = (vm->vs->cursor_pos + HEIGHT - 6) / 2;
 	mvwprintw(vm->vs->win_info,
 			vm->vs->cursor_pos,
 			DEFAULT_INDENT,
-			"The winner is ");
+			"=== Match finished ===");
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Winner : Player -%d", vm->last_alive->id);
 	wattron(vm->vs->win_info, g_colors_players[vm->last_alive->id]);
-	wprintw(vm->vs->win_info, "%.36s", vm->last_alive->name);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Name   : %.36s", vm->last_alive->name);
 	wattroff(vm->vs->win_info, g_colors_players[vm->last_alive->id]);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Cycle  : %zd", vm->cycles);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Last live cycle : %zd", vm->last_alive->last_live);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Lives (curr/prev): %zu/%zu",
+			vm->last_alive->current_lives_num,
+			vm->last_alive->previous_lives_num);
+}
+
+static void	draw_leader(t_vm *vm)
+{
+	if (!vm->last_alive || !vm->cursors_num)
+		return ;
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 2,
+			DEFAULT_INDENT,
+			"Current leader : Player -%d", vm->last_alive->id);
+	wattron(vm->vs->win_info, g_colors_players[vm->last_alive->id]);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Name : %.36s", vm->last_alive->name);
+	wattroff(vm->vs->win_info, g_colors_players[vm->last_alive->id]);
+	mvwprintw(vm->vs->win_info,
+			vm->vs->cursor_pos += 1,
+			DEFAULT_INDENT,
+			"Last live cycle : %zd", vm->last_alive->last_live);
 }
 
 void		draw_info(t_vm *vm)
@@ -113,6 +154,7 @@ void		draw_info(t_vm *vm)
 			DEFAULT_INDENT, "Bar of lives for previous period :");
 	draw_lives_bar(vm, false);
 	draw_game_params(vm);
+	draw_leader(vm);
 	if (vm->vs->aff_player)
 		draw_aff(vm);
 	if (!vm->cursors_num)

@@ -13,6 +13,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 #include "corewar.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 void		print_intro(t_player **players, int32_t players_num)
@@ -34,9 +35,19 @@ void		print_intro(t_player **players, int32_t players_num)
 
 inline void	print_last_alive(t_vm *vm)
 {
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-													FT_ABS(vm->last_alive->id),
-													vm->last_alive->name);
+	if (!vm->last_alive)
+		return ;
+	printf("\n=== Match finished ===\n");
+	printf("Player %d: \"%s\"\n",
+		FT_ABS(vm->last_alive->id),
+		vm->last_alive->name);
+	printf("Cycle: %lld | Last live: %lld\n",
+		(long long)vm->cycles,
+		(long long)vm->last_alive->last_live);
+	printf("Lives (current/previous period): %llu/%llu\n",
+		(unsigned long long)vm->last_alive->current_lives_num,
+		(unsigned long long)vm->last_alive->previous_lives_num);
+	printf("Result: has won!\n");
 }
 
 void		print_arena(uint8_t *arena, int print_mode)

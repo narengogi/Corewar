@@ -66,16 +66,26 @@ static void	exec_cycle_vs(t_vm *vm)
 
 static void	print_result_on_exit(t_vm *vm)
 {
-	if (!vm->last_alive)
+	t_player *last_alive;
+
+	last_alive = vm->last_alive;
+	if (!last_alive)
 		return ;
+	printf("\n=== %s ===\n",
+		(!vm->cursors_num) ? "Match finished" : "Match stopped by user (ESC)");
+	printf("Player %d: \"%s\"\n",
+		FT_ABS(last_alive->id),
+		last_alive->name);
+	printf("Cycle: %lld | Last live: %lld\n",
+		(long long)vm->cycles,
+		(long long)last_alive->last_live);
+	printf("Lives (current/previous period): %llu/%llu\n",
+		(unsigned long long)last_alive->current_lives_num,
+		(unsigned long long)last_alive->previous_lives_num);
 	if (!vm->cursors_num)
-		printf("Contestant %d, \"%s\", has won !\n",
-			FT_ABS(vm->last_alive->id),
-			vm->last_alive->name);
+		printf("Result: has won!\n");
 	else
-		printf("Contestant %d, \"%s\", is leading.\n",
-			FT_ABS(vm->last_alive->id),
-			vm->last_alive->name);
+		printf("Result: leading when stopped.\n");
 	fflush(stdout);
 }
 
